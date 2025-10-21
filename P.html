@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jualan Bot WhatsApp - Solusi Otomatisasi Bisnis Anda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #25D366;
+            --primary-dark: #128C7E;
+            --secondary: #075E54;
+            --accent: #DCF8C6;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 15px;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .header::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 12px auto;
+            border-radius: 2px;
+        }
+        
+        h1 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        
+        .tagline {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin: 0 auto 15px;
+        }
+        
+        .highlight {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 30px 0;
+            padding: 25px 20px;
+            background: var(--gradient);
+            border-radius: 16px;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero-content h2 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero-content p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .hero-image {
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 20px 15px;
+            background: var(--light);
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .feature i {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        .feature h3 {
+            margin-bottom: 8px;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .feature p {
+            font-size: 0.9rem;
+        }
+        
+        .content-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .qr-section, .sales-section {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .qr-section:hover, .sales-section:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 1.3rem;
+        }
+        
+        .qr-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .qr-code {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 15px;
+            background-color: white;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .qr-instruction {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+        
+        .wa-direct {
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .wa-number {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin: 8px 0;
+        }
+        
+        .sales-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .sales-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .sales-list li {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        
+        .sales-list li:hover {
+            background: rgba(220, 248, 198, 0.3);
+        }
+        
+        .sales-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .package-name {
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .package-sales {
+            color: var(--primary-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .option {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+        
+        .option.popular::before {
+            content: 'POPULER';
+            position: absolute;
+            top: 12px;
+            right: -25px;
+            background: var(--primary);
+            color: white;
+            padding: 4px 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+        
+        .option h3 {
+            color: var(--secondary);
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+        
+        .price {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 12px 0;
+        }
+        
+        .price span {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .features-list {
+            text-align: left;
+            margin: 15px 0;
+            padding: 0 10px;
+        }
+        
+        .features-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .features-list i {
+            color: var(--primary);
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 211, 102, 0.4);
+        }
+        
+        .btn-large {
+            padding: 14px 28px;
+            font-size: 1.05rem;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.5);
+            z-index: 100;
+            animation: pulse 2s infinite;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        /* Tombol Lihat Paket yang diposisikan di tengah */
+        .btn-center {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        /* Media query untuk perangkat yang lebih besar */
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
+            .container {
+                max-width: 700px;
+                padding: 25px;
+            }
+            
+            .hero {
+                flex-direction: row;
+                align-items: center;
+                text-align: left;
+                padding: 30px;
+            }
+            
+            .hero-content {
+                flex: 1;
+            }
+            
+            .hero-image {
+                flex: 1;
+            }
+            
+            .features {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .feature {
+                flex: 1;
+                min-width: 45%;
+            }
+            
+            .content-section {
+                flex-direction: row;
+            }
+            
+            .qr-section, .sales-section {
+                flex: 1;
+            }
+            
+            .options {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .option {
+                flex: 1;
+                min-width: 45%;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 900px;
+            }
+            
+            .feature {
+                min-width: 22%;
+            }
+            
+            .option {
+                min-width: 30%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Jualan Bot WhatsApp</h1>
+            <p class="tagline">Tingkatkan penjualan Anda dengan <span class="highlight">Bot WhatsApp otomatis</span> yang cerdas dan mudah digunakan</p>
+        </div>
+        
+        <!-- Tombol Lihat Paket yang diposisikan di tengah -->
+        <div class="btn-center">
+            <a href="#options" class="btn btn-large">Lihat Paket</a>
+        </div>
+        
+        <div class="hero">
+            <div class="hero-content">
+                <h2>Solusi Otomatisasi Bisnis Anda</h2>
+                <p>Dengan Bot WhatsApp kami, Anda dapat melayani pelanggan 24/7 tanpa henti, meningkatkan konversi penjualan, dan menghemat waktu berharga Anda.</p>
+                <a href="#options" class="btn">Lihat Paket</a>
+            </div>
+            <div class="hero-image">
+                <div style="width:100%;height:200px;background:#f0f0f0;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#666;">
+                    <i class="fas fa-robot" style="font-size:4rem;"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-robot"></i>
+                <h3>Otomatis 24/7</h3>
+                <p>Bot bekerja tanpa henti untuk melayani pelanggan Anda</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-bolt"></i>
+                <h3>Respons Cepat</h3>
+                <p>Balas pesan pelanggan dalam hitungan detik</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-chart-line"></i>
+                <h3>Tingkatkan Penjualan</h3>
+                <p>Konversi lebih tinggi dengan respons instan</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-cogs"></i>
+                <h3>Mudah Digunakan</h3>
+                <p>Setup cepat tanpa perlu kemampuan teknis</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <div class="qr-section">
+                <div class="section-title">
+                    <i class="fas fa-qrcode"></i>
+                    <h2>Hubungi Langsung</h2>
+                </div>
+                <div class="qr-container">
+                    <div class="qr-code">
+                        <!-- QR Code akan digenerate oleh JavaScript -->
+                    </div>
+                    <p class="qr-instruction">Scan kode QR untuk terhubung langsung via WhatsApp</p>
+                </div>
+                <div class="wa-direct">
+                    <p class="wa-number">+62 881-0100-10280</p>
+                    <a href="https://wa.me/62881010010280?text=Halo,%20saya%20tertarik%20dengan%20bot%20WhatsApp%20yang%20Anda%20tawarkan" class="btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Chat Sekarang
+                    </a>
+                </div>
+            </div>
+            
+            <div class="sales-section">
+                <div class="section-title">
+                    <i class="fas fa-chart-bar"></i>
+                    <h2>Statistik Penjualan</h2>
+                </div>
+                <div class="sales-list">
+                    <ul>
+                        <li>
+                            <span class="package-name">Paket 30 Hari</span>
+                            <span class="package-sales">Terjual: 15 unit</span>
+                        </li>
+                        <li>
+                            <span class="package-name">Paket 10 Hari</span>
+                            <span class="package-sales">Terjual: 28 unit</span>
+                        </li>
+                        <li>
+                            <span class="package-name">Paket 90 Hari</span>
+                            <span class="package-sales">Terjual: 8 unit</span>
+                        </li>
+                        <li>
+                            <span class="package-name">Paket Custom</span>
+                            <span class="package-sales">Terjual: 5 unit</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="options" id="options">
+            <div class="option">
+                <h3>Paket 30 Hari</h3>
+                <div class="price">Rp 10.000</div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Respons otomatis 24/7</li>
+                    <li><i class="fas fa-check"></i> Template pesan dasar</li>
+                    <li><i class="fas fa-check"></i> Dukungan 1 nomor WhatsApp</li>
+                    <li><i class="fas fa-check"></i> Laporan aktivitas harian</li>
+                </ul>
+                <a href="https://wa.me/62881010010280?text=Saya%20ingin%20pesan%20Paket%2030%20Hari%20seharga%20Rp%2010.000" class="btn" target="_blank">Pesan Sekarang</a>
+            </div>
+            
+            <div class="option popular">
+                <h3>Paket Permanen</h3>
+                <div class="price">Rp 28.000</div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Semua fitur Paket 30 Hari</li>
+                    <li><i class="fas fa-check"></i> Template pesan lanjutan</li>
+                    <li><i class="fas fa-check"></i> Integrasi katalog produk</li>
+                    <li><i class="fas fa-check"></i> Dukungan 2 nomor WhatsApp</li>
+                    <li><i class="fas fa-check"></i> Laporan analitik mingguan</li>
+                </ul>
+                <a href="https://wa.me/62881010010280?text=Saya%20ingin%20pesan%20Paket%20Permanen%20seharga%20Rp%2028.000" class="btn" target="_blank">Pesan Sekarang</a>
+            </div>
+            
+            <div class="option">
+                <h3>Paket Kustom</h3>
+                <div class="price">Hubungi</div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Semua fitur Paket Permanen</li>
+                    <li><i class="fas fa-check"></i> Integrasi dengan sistem Anda</li>
+                    <li><i class="fas fa-check"></i> Fitur khusus sesuai kebutuhan</li>
+                    <li><i class="fas fa-check"></i> Dukungan prioritas 24/7</li>
+                </ul>
+                <a href="https://wa.me/62881010010280?text=Saya%20ingin%20konsultasi%20tentang%20Paket%20Kustom" class="btn btn-outline" target="_blank">Hubungi Kami</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2023 Jualan Bot WhatsApp. Semua hak dilindungi.</p>
+            <p>Hubungi: admin@jualanbotwa.com | +62 881-0100-10280</p>
+        </div>
+    </div>
+    
+    <a href="https://wa.me/62881010010280?text=Halo,%20saya%20tertarik%20dengan%20bot%20WhatsApp%20yang%20Anda%20tawarkan" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script>
+        // Generate QR Code untuk WhatsApp
+        document.addEventListener('DOMContentLoaded', function() {
+            // Nomor WhatsApp tujuan
+            const phoneNumber = "62881010010280";
+            const message = "Halo, saya tertarik dengan bot WhatsApp yang Anda tawarkan";
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Generate QR Code
+            const qrContainer = document.querySelector('.qr-code');
+            const qr = qrcode(0, 'M');
+            qr.addData(whatsappUrl);
+            qr.make();
+            
+            // Tambahkan QR Code ke dalam container
+            qrContainer.innerHTML = qr.createImgTag(4);
+        });
+    </script>
+</body>
+</html>
